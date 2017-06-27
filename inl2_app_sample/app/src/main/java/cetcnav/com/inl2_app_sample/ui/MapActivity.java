@@ -1,5 +1,6 @@
 package cetcnav.com.inl2_app_sample.ui;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
@@ -16,13 +17,14 @@ import org.json.JSONObject;
 import cetcnav.com.inl2_app_sample.R;
 import cetcnav.com.inl2_app_sample.mqtt.MqttClient;
 import cetcnav.com.inl2_app_sample.mqtt.MqttUtil;
+import cetcnav.com.inl2_app_sample.util.InputCacheUtil;
 
 public class MapActivity extends AppCompatActivity implements MqttCallback{
 
     public static final String MAP_ACTIVITY_MAP_URL = "map.activity.map.url";
     public static final String MAP_ACTIVITY_MAP_URI = "map.activity.map.uri";
     WebView mWebViewMap;
-    private String mX, mY, mOrientation, mMapUri,mMapUrl;
+    private String mX, mY, mOrientation, mMapUri,mMapUrl, mSampleMapUrl;
     private boolean bSampling;
     private int mSampleCount;
 
@@ -52,18 +54,22 @@ public class MapActivity extends AppCompatActivity implements MqttCallback{
     private void showMap(){
 
             WebSettings webSettings = mWebViewMap.getSettings();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                WebView.setWebContentsDebuggingEnabled(true);
+            }
             webSettings.setJavaScriptEnabled(true);
             webSettings.setBuiltInZoomControls(true);
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
             mWebViewMap.addJavascriptInterface(this, "android");
+            mWebViewMap.setWebViewClient(new WebViewClient(){
+                @Override
+                public void onPageFinished(WebView view, String url){
+                    mWebViewMap.loadUrl("javascript:loadMap(\""+ mMapUrl+"\")");
+                }
+            });
 
-//            mWebViewMap.setWebViewClient(new WebViewClient(){
-//                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                    view.loadUrl(url);
-//                    return true;
-//                }
-//            });
-            mWebViewMap.loadUrl(mMapUrl);
+            String mapUrl = InputCacheUtil.getMainInfo(this, InputCacheUtil.MAIN_MAP_URL);
+            mWebViewMap.loadUrl(mapUrl);
     }
 
     @Override

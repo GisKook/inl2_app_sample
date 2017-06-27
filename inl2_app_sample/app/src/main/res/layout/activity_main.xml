@@ -41,10 +41,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:hint="@string/main_ring_mac"
         android:ems="10"
         android:id="@+id/edit_text_ring_mac"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/main_map_url"
+        android:ems="10"
+        android:id="@+id/edit_text_map_url"
         />
 
     <Button

@@ -5,5 +5,5 @@ package cetcnav.com.inl2_app_sample.ui;
  */
 
 public class Constants {
-    public static final String HTTP_DOMAIN = "http://222.222.218.52:8876";
+    public static final String HTTP_DOMAIN = "http://222.222.218.51:7771";
 }

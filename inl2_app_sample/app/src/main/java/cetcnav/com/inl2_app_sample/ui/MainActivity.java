@@ -13,7 +13,7 @@ import cetcnav.com.inl2_app_sample.R;
 import cetcnav.com.inl2_app_sample.util.InputCacheUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText mMqttAddr,mMqttPort,mMqttPub, mRingMac;
+    private EditText mMqttAddr,mMqttPort,mMqttPub, mRingMac, mMapUrl;
     private Button mBtnOK;
 
     @Override
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMqttPort = (EditText) this.findViewById(R.id.edit_text_mqtt_port);
         mMqttPub = (EditText) this.findViewById(R.id.edit_text_mqtt_pub);
         mRingMac = (EditText) this.findViewById(R.id.edit_text_ring_mac);
+        mMapUrl = (EditText) this.findViewById(R.id.edit_text_map_url);
 
         mBtnOK = (Button) this.findViewById(R.id.button_main_ok);
         mBtnOK.setOnClickListener(this);
@@ -32,18 +33,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMqttPort.setText(InputCacheUtil.getMainInfo(this, InputCacheUtil.MAIN_MQTT_BROKER_PORT));
         mMqttPub.setText(InputCacheUtil.getMainInfo(this, InputCacheUtil.MAIN_MQTT_PUB_TOPIC));
         mRingMac.setText(InputCacheUtil.getMainInfo(this, InputCacheUtil.MAIN_RING_MAC));
+        mMapUrl.setText(InputCacheUtil.getMainInfo(this, InputCacheUtil.MAIN_MAP_URL));
     }
 
     private boolean checkInput(){
         String mqtt_broker_addr = mMqttAddr.getText().toString();
         String mqtt_broker_port = mMqttPort.getText().toString();
         String mqtt_pub = mMqttPub.getText().toString();
-        String ring_mac = mRingMac.getText().toString();
+        String ring_mac = mRingMac.getText().toString().toLowerCase();
+        String map_url = mMapUrl.getText().toString();
 
         InputCacheUtil.storeMainInfo(this, InputCacheUtil.MAIN_MQTT_BROKER_ADDR, mqtt_broker_addr);
         InputCacheUtil.storeMainInfo(this, InputCacheUtil.MAIN_MQTT_BROKER_PORT, mqtt_broker_port);
         InputCacheUtil.storeMainInfo(this, InputCacheUtil.MAIN_MQTT_PUB_TOPIC, mqtt_pub);
         InputCacheUtil.storeMainInfo(this, InputCacheUtil.MAIN_RING_MAC, ring_mac);
+        InputCacheUtil.storeMainInfo(this, InputCacheUtil.MAIN_MAP_URL, map_url);
+
 
         if (mqtt_broker_addr.trim().isEmpty()){
             Toast.makeText(this, getResources().getText(R.string.main_toast_mqtt_domain_should_not_empty),Toast.LENGTH_SHORT).show();
@@ -66,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ring_mac.trim().isEmpty()){
             Toast.makeText(this, getResources().getText(R.string.main_toast_ring_mac_should_not_empty),Toast.LENGTH_SHORT).show();
             mRingMac.requestFocus();
+            return false;
+        }
+
+        if (map_url.trim().isEmpty()){
+            Toast.makeText(this, getResources().getText(R.string.main_toast_map_url_should_not_empty),Toast.LENGTH_SHORT).show();
+            mMapUrl.requestFocus();
             return false;
         }
 

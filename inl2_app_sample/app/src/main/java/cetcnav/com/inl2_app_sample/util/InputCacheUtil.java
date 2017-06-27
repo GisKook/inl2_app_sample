@@ -12,6 +12,7 @@ public class InputCacheUtil{
     public static final  String MAIN_MQTT_BROKER_PORT = "main_mqtt_broker_port";
     public static final  String MAIN_MQTT_PUB_TOPIC  = "main_mqtt_pub_topic";
     public static final  String MAIN_RING_MAC  = "main_ring_mac";
+    public static final  String MAIN_MAP_URL  = "main_map_url";
 
     private static final  String MAIN_KEY = "main_key";
 

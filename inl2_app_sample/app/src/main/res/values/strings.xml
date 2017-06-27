@@ -4,11 +4,13 @@
     <string name="main_mqtt_port">MQTT服务器端口</string>
     <string name="main_mqtt_pub">MQTT发送地址</string>
     <string name="main_ring_mac">手环MAC地址</string>
+    <string name="main_map_url">采样地图地址</string>
     <string name="main_ok">进入</string>
     <string name="main_toast_mqtt_domain_should_not_empty">MQTT服务器地址不能为空</string>
     <string name="main_toast_mqtt_port_should_not_empty">MQTT服务器端口不能为空</string>
     <string name="main_toast_mqtt_pub_should_not_empty">MQTT服务主体不能为空</string>
     <string name="main_toast_ring_mac_should_not_empty">采样手环MAC地址不能为空</string>
+    <string name="main_toast_map_url_should_not_empty">采样地图地址不能为空</string>
 
     <string name="map_list_toast_mqtt_connect_success">Mqtt连接成功</string>
     <string name="map_list_toast_mqtt_connect_fail">Mqtt连接失败</string>
